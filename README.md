@@ -1,35 +1,49 @@
-import tkinter as tk
+def calculate():
+    operation = input('''
+Selecione o tipo da equacao desejada
++ para adicao
+- para subtracao
+* para multiplicacao
+/ para divisao
+''')
 
-def adicionar_numero(num):
-    campo_texto.insert(tk.END, num)
+    number_1 = int(input('Insira o primeiro numero: '))
+    number_2 = int(input('Insira o segundo numero: '))
 
-def calcular():
-    expressao = campo_texto.get()
-    resultado = eval(expressao)
-    campo_texto.delete(0, tk.END)
-    campo_texto.insert(tk.END, resultado)
+    if operation == '+':
+        print('{} + {} = '.format(number_1, number_2))
+        print(number_1 + number_2)
 
-janela = tk.Tk()
+    elif operation == '-':
+        print('{} - {} = '.format(number_1, number_2))
+        print(number_1 - number_2)
 
-campo_texto = tk.Entry(janela, width=20)
-campo_texto.grid(row=0, column=0, columnspan=4)
+    elif operation == '*':
+        print('{} * {} = '.format(number_1, number_2))
+        print(number_1 * number_2)
 
-botoes = [
-    "7", "8", "9", "/",
-    "4", "5", "6", "*",
-    "1", "2", "3", "-",
-    "0", ".", "=", "+"
-]
+    elif operation == '/':
+        print('{} / {} = '.format(number_1, number_2))
+        print(number_1 / number_2)
 
-row = 1
-col = 0
-for botao in botoes:
-    tk.Button(janela, text=botao, width=5, command=lambda num=botao: adicionar_numero(num)).grid(row=row, column=col)
-    col += 1
-    if col > 3:
-        col = 0
-        row += 1
+    else:
+        print('Valor nao suportado')
 
-tk.Button(janela, text="Calcular", width=20, command=calcular).grid(row=row, column=0, columnspan=4)
+    # Add again() function to calculate() function
+    again()
 
-janela.mainloop()
+def again():
+    calc_again = input('''
+Voce gostaria de calcular uma nova equacao?
+Digite S para SIM ou N para NAO.
+''')
+
+    if calc_again.upper() == 'S':
+        calculate()
+    elif calc_again.upper() == 'N':
+        print('Ate logo')
+    else:
+        again()
+
+calculate()
+
